@@ -13,11 +13,6 @@ class M_settings extends CI_Model {
     }
     function save($request)
     {
-        $timezone 	= new DateTimeZone("Asia/Jakarta");//untuk menyesuaikan dengan jam indonesia
-        $dat 		= new DateTime();//untuk menyesuaikan dengan jam indonesia
-        $dat->setTimezone($timezone);//untuk menyesuaikan dengan jam indonesia
-        $date		= date('Y-m-d');
-        $time		= $dat->format('H:i:s'); // format jam dipanggil disini
         $insertStatus = $this->db->insert('unit_testing',array('title'=>$request['title'],'description'=>$request['description']));
         return $insertStatus;
     }
@@ -30,12 +25,7 @@ class M_settings extends CI_Model {
 	      return $query->row();
     }
     function update($where, $request){
-        $timezone 	= new DateTimeZone("Asia/Jakarta");//untuk menyesuaikan dengan jam indonesia
-        $dat 		= new DateTime();//untuk menyesuaikan dengan jam indonesia
-        $dat->setTimezone($timezone);//untuk menyesuaikan dengan jam indonesia
-        $date		= date('Y-m-d');
-        $time		= $dat->format('H:i:s'); // format jam dipanggil disini
-        $this->db->update('unit_testing', array('title'=>$request['title'],'description'=>$request['description'], 'date_modified'=>$date), $where);
+        $this->db->update('unit_testing', array('title'=>$request['title'],'description'=>$request['description']), $where);
 		    return $this->db->affected_rows();
     }
      function get_search_data($key)
